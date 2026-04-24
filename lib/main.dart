@@ -112,7 +112,22 @@ class _WebviewHomePageState extends State<WebviewHomePage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('AminoSocial'),
+          title: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(6),
+                child: Image.asset(
+                  'assets/images/app_logo.png',
+                  width: 24,
+                  height: 24,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(width: 8),
+              const Text('AminoSocial'),
+            ],
+          ),
           actions: [
             IconButton(
               onPressed: () => _controller.loadRequest(Uri.parse(_homeUrl)),
@@ -160,21 +175,68 @@ class _SplashOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColoredBox(
-      color: Theme.of(context).colorScheme.surface,
-      child: const Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(Icons.public, size: 64),
-            SizedBox(height: 12),
-            Text(
-              'AminoSocial',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(height: 12),
-            CircularProgressIndicator(),
+    final colorScheme = Theme.of(context).colorScheme;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            colorScheme.primaryContainer.withValues(alpha: 0.9),
+            colorScheme.surface,
+            colorScheme.tertiaryContainer.withValues(alpha: 0.9),
           ],
+        ),
+      ),
+      child: Center(
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 28),
+          padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 24),
+          decoration: BoxDecoration(
+            color: colorScheme.surface.withValues(alpha: 0.8),
+            borderRadius: BorderRadius.circular(24),
+            boxShadow: const [
+              BoxShadow(
+                color: Color(0x26000000),
+                blurRadius: 24,
+                offset: Offset(0, 12),
+              ),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(18),
+                child: Image.asset(
+                  'assets/images/app_logo.png',
+                  width: 84,
+                  height: 84,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(height: 14),
+              const Text(
+                'AminoSocial',
+                style: TextStyle(fontSize: 26, fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'aminosocial.com',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: colorScheme.onSurfaceVariant,
+                  letterSpacing: 0.4,
+                ),
+              ),
+              const SizedBox(height: 18),
+              const SizedBox(
+                width: 28,
+                height: 28,
+                child: CircularProgressIndicator(strokeWidth: 3),
+              ),
+            ],
+          ),
         ),
       ),
     );
