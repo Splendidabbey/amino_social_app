@@ -70,6 +70,10 @@ class _WebviewHomePageState extends State<WebviewHomePage> {
             if (!mounted || error.isForMainFrame != true) {
               return;
             }
+            if (_isRecoverableCacheMiss(error.description)) {
+              _recoverFromCacheMiss();
+              return;
+            }
             setState(() {
               _loadError = error.description;
             });
@@ -79,13 +83,32 @@ class _WebviewHomePageState extends State<WebviewHomePage> {
       ..loadRequest(Uri.parse(_homeUrl));
   }
 
+  bool _isRecoverableCacheMiss(String description) {
+    return description.toUpperCase().contains('ERR_CACHE_MISS');
+  }
+
+  Future<void> _loadCurrentOrHomeUrl() async {
+    final currentUrl = await _controller.currentUrl();
+    final targetUrl = currentUrl ?? _homeUrl;
+    await _controller.loadRequest(Uri.parse(targetUrl));
+  }
+
+  Future<void> _recoverFromCacheMiss() async {
+    setState(() {
+      _loadError = null;
+      _isSplashVisible = true;
+      _progress = 0;
+    });
+    await _controller.loadRequest(Uri.parse(_homeUrl));
+  }
+
   Future<void> _reloadPage() async {
     setState(() {
       _loadError = null;
       _isSplashVisible = true;
       _progress = 0;
     });
-    await _controller.reload();
+    await _loadCurrentOrHomeUrl();
   }
 
   Future<bool> _handleBackNavigation() async {
@@ -144,7 +167,7 @@ class _WebviewHomePageState extends State<WebviewHomePage> {
         body: Stack(
           children: [
             RefreshIndicator(
-              onRefresh: () => _controller.reload(),
+              onRefresh: _loadCurrentOrHomeUrl,
               child: ListView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 children: [
