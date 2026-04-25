@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "amino_social_webview" "\0"
+            VALUE "FileDescription", "aminosocial" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "amino_social_webview" "\0"
+            VALUE "InternalName", "aminosocial" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2026 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "amino_social_webview.exe" "\0"
-            VALUE "ProductName", "amino_social_webview" "\0"
+            VALUE "OriginalFilename", "aminosocial.exe" "\0"
+            VALUE "ProductName", "aminosocial" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

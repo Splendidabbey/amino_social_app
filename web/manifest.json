@@ -1,6 +1,6 @@
 {
-    "name": "amino_social_webview",
-    "short_name": "amino_social_webview",
+    "name": "aminosocial",
+    "short_name": "aminosocial",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#FFFFFF",

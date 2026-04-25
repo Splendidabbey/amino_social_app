@@ -1,4 +1,4 @@
-# amino_social_webview
+# aminosocial
 
 A new Flutter project.
 

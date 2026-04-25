@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="amino_social_webview"
+        android:label="aminosocial"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
